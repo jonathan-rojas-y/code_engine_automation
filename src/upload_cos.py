@@ -91,7 +91,8 @@ def list_objects_buckets(bucket_name,days_diferential):
         object_date_utc = item["LastModified"].astimezone(TIME_ZONE_LIMA)
         
         if date_pivot >= object_date_utc:
-            print(f"Se elimina: {item["Key"]}")
+            image_name = item["Key"]
+            print(f"Se elimina: { image_name }")
             cont_deleted_files = cont_deleted_files + 1
     print(f"Total de items: {len(response["Contents"])}")
     print(f"Total eliminados: {cont_deleted_files}")

@@ -94,6 +94,7 @@ def list_objects_buckets(bucket_name,days_diferential):
             image_name = item["Key"]
             print(f"Se elimina: { image_name }")
             cont_deleted_files = cont_deleted_files + 1
-    print(f"Total de items: {len(response["Contents"])}")
+    contents = response["Contents"]
+    print(f"Total de items: {len(contents)}")
     print(f"Total eliminados: {cont_deleted_files}")
 

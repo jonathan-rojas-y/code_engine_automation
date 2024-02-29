@@ -1,4 +1,4 @@
-from upload_cos import upload_file, list_objects_buckets
+# from upload_cos import upload_file, list_objects_buckets
 from create_files import generate_file
 import os
 

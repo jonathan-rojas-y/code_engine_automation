@@ -10,4 +10,4 @@ bucket_name = os.environ.get("BUCKET_NAME")
 #     filename = generate_file("automatically_created_file")
 #     upload_file(BUCKET_NAME, filename, filename)
 
-list_objects_buckets(bucket_name, int(days_diferential))
+list_objects_buckets(bucket_name, float(days_diferential))

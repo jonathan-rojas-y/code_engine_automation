@@ -10,4 +10,6 @@ BUCKET_NAME = "cos-test-efact-bucket-01"
 
 days_diferential = os.environ.get("DAYS_DIFERENTIAL")
 
-list_objects_buckets("cos-test-efact-bucket-01", days_diferential)
+# list_objects_buckets("cos-test-efact-bucket-01", days_diferential)
+
+print(days_diferential)

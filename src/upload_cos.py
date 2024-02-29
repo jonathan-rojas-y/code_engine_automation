@@ -52,17 +52,13 @@ def get_date_cos_file(file_name, bucket_name):
 # get_date_cos_file("automatically_created_file_20240227_185711476109.txt","cos-test-efact-bucket-01")
 
 
-def delete_cos_file(file_name, bucket_name, date_pivot):
+def delete_cos_file(file_name, bucket_name):
     try:
-        last_modified_file = get_date_cos_file(file_name, bucket_name)
-        if date_pivot >= last_modified_file:
-            response = cos.delete_object(
-                Bucket=bucket_name,
-                Key=file_name,
-            )
-            print(f"Archivo {file_name} eliminado")
-        else:
-            pass
+        response = cos.delete_object(
+            Bucket=bucket_name,
+            Key=file_name
+        )
+        print(f"ARCHIVO {file_name} ELIMINADO!")
     except Exception as e:
         print("Unable to delete object: {0}".format(e))
 
@@ -84,17 +80,18 @@ def list_objects_buckets(bucket_name,days_diferential):
     response = cos.list_objects_v2(
         Bucket=bucket_name
     )
+    contents = response["Contents"]
 
     date_pivot = datetime.now(TIME_ZONE_LIMA) - timedelta(days=days_diferential)
     cont_deleted_files = 0
-    for item in response["Contents"]:
+    for item in contents:
         object_date_utc = item["LastModified"].astimezone(TIME_ZONE_LIMA)
-        
         if date_pivot >= object_date_utc:
-            image_name = item["Key"]
-            print(f"Se elimina: { image_name }")
+            file_name = item["Key"]
+            print(f"Se elimina: { file_name }")
+            delete_cos_file(file_name, bucket_name)
             cont_deleted_files = cont_deleted_files + 1
-    contents = response["Contents"]
+    
     print(f"Total de items: {len(contents)}")
     print(f"Total eliminados: {cont_deleted_files}")
 

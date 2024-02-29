@@ -96,4 +96,3 @@ def list_objects_buckets(bucket_name,days_diferential):
     print(f"Total de items: {len(response["Contents"])}")
     print(f"Total eliminados: {cont_deleted_files}")
 
-list_objects_buckets("cos-test-efact-bucket-01", 1.5)
